@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title> Login Page </title>
+	<title> Create Account </title>
 </head>
 
 <body>
@@ -12,10 +12,16 @@
 
 		<label for="password">Password:</label>
 		<input type="password" id="password" name="password"><br><br>
+
+		<label for="first_name">First Name:</label>
+		<input type="text" id="first_name" name="first_name"><br><br>
+
+		<label for="last_name">Last Name:</label>
+		<input type="text" id="last_name" name="last_name"><br><br>
 		
 		<input type="submit" value="Submit">
 	</form>
 
-	<h1 class="title"> Create New Account </h1>
-	<a href="{{url_for('create_user')}}"><button class="button"> Create New Account </button> </a>
+	<h1 class="title"> Login </h1>
+	<a href="{{url_for('login')}}"><button class="button"> Login </button> </a>
 </body>

@@ -1,62 +1,42 @@
 from flask import Flask, redirect, render_template, request, session, url_for, g, flash, abort
-import sqlite3
-
-
-DATABASE = "schedule.db"
-
-# connects to the database
-def get_db():
-    # if there is a database, use it
-    db = getattr(g, '_database', None)
-    if db is None:
-        # otherwise, create a database to use
-        db = g._database = sqlite3.connect(DATABASE)
-    return db
-
-# converts the tuples from get_db() into dictionaries
-def make_dicts(cursor, row):
-    return dict((cursor.description[idx][0], value)
-                for idx, value in enumerate(row))
-
-# given a query, executes and returns the result
-def query_db(query, args=(), one=False):
-    cur = get_db().execute(query, args)
-    rv = cur.fetchall()
-    cur.close()
-    return (rv[0] if rv else None) if one else rv
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-# this function must come after the instantiation of the variable app
-# (i.e. this comes after the line app = Flask(__name__))
-@app.teardown_appcontext
-def close_connection(exception):
-    db = getattr(g, '_database', None)
-    if db is not None:
-        # close the database if we are connected to it
-        db.close()
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///schedule.db"
+db = SQLAlchemy(app)
 
-        g.pop('_database')
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    firstname = db.Column(db.String(10))
+    lastname = db.Column(db.String(10))
+    username = db.Column(db.String(10), primary_key = True)
+    password = db.Column(db.String(10), primary_key = True)
 
-@app.before_request
-def before_input():
+# class Priority(db.Model):
+#     id = db.Column(db.Integer, primary_key = True)
+#     firstname = db.Column(db.String(10))
+#     lastname = db.Column(db.String(10))
 
-	# Initalizes g.user to be None so that if a user tries to access any page before logging in, they will be redirected
-	# to the login page.
-	g.user = None
-	if ('user_id' in session):
-
-		# This gets the user's first and last name and stores it in g.user.
-		db = get_db()
-		db.row_factory = make_dicts
-		name = query_db('''SELECT FirstName, LastName FROM User WHERE NumberID=?''', [session['user_id']], one=True)
-		close_connection(None)
-		g.user = name['FirstName'] + " " + name['LastName']
-
+# Creates the tables.
+db.create_all()
 
 @app.route('/')
 def index():
-	return render_template('index.html')
+    return redirect(url_for('login'))
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == "POST":
+        print(request.form)
+    return render_template('index.html')
+
+@app.route('/create_user', methods=['GET', 'POST'])
+def create_user():
+    if request.method == "POST":
+        print(request.form)
+    return render_template('CreateAccount.html')   
 
 
 if (__name__ == "__main__"):
