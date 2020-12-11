@@ -32,7 +32,10 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
         user = User.query.filter_by(username=username, password=password).first()
-        print(user.id)
+        if user != None:
+            print(user.id)
+        else:
+            flash("The user does not exist")
     return render_template('index.html')
 
 @app.route('/create_user', methods=['GET', 'POST'])
@@ -49,6 +52,8 @@ def create_user():
                         lastname=last_name)
             db.session.add(user)
             db.session.commit()
+        else:
+            flash("The password is taken.")
     return render_template('CreateAccount.html')   
 
 
