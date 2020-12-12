@@ -33,7 +33,7 @@ def login():
         password = request.form["password"]
         user = User.query.filter_by(username=username, password=password).first()
         if user != None:
-            print(user.id)
+            return redirect(url_for('home'))
         else:
             flash("The user does not exist")
     return render_template('index.html')
@@ -55,6 +55,10 @@ def create_user():
         else:
             flash("The password is taken.")
     return render_template('CreateAccount.html')   
+
+@app.route('/home')
+def home():
+    return render_template('Home.html')   
 
 
 if (__name__ == "__main__"):
