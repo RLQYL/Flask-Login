@@ -63,8 +63,7 @@ def login():
             session["id"] = username
             return redirect(url_for('home')) # url_for takes in a function parameter
         else:
-            flash("The user does not exist")
-    print(len(session))
+            flash("Login Failed!")
     return render_template('index.html')
 
 @app.route('/create_user', methods=['GET', 'POST'])
@@ -87,7 +86,11 @@ def create_user():
 
 @app.route('/homepage')
 def home():
-    return render_template('Home.html')
+    if (len(session) == 0):
+        return(abort(403))
+    name = User.query.filter_by(username=session["id"]).first()
+    user_name = name.firstname + " " + name.lastname
+    return render_template('Home.html', name=user_name)
 
 @app.route('/logout')
 def logout():
