@@ -1,3 +1,13 @@
+body{
+    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    border: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
 #message{
 	text-align: center;
 	font-size: 2.0rem;
@@ -7,26 +17,53 @@
 
 #loginbox{
 	border: 2px solid black;
-	width: 10%;
+	width: 20%;
 	height: 40%;
-	padding: 5%;
+	padding-left: 7%;
+	padding-right: 7%;
+	padding-top: 3%;
+	padding-bottom: 3%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10%;
+	background-color: grey;
 	display: flex;
-
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 #username, #password{
-	font-size: 1.5rem;
+	font-size: 1.2rem;
 	color: black;
+	background-color: white;
+	border-color: white;
+	border: 0px;
+	width: 70%;
 }
 
 .title{
 	text-align: center;
-	font-size: 1.5rem;
+	font-size: 2rem;
+	color: yellow;
+	font-weight: bold;
 }
 
-.button{
+#submit_button{
 	font-size: 1.5rem;
 	text-align: center;
 	color: black;
-	background-color: light-grey;
+	background-color: lightgrey;
+	display: flex;
+	justify-content: center;
+	border: 0px;
+}
+
+#create_new_account_button{
+	font-size: 1.5rem;
+	text-align: center;
+	color: black;
+	background-color: lightgrey;
+	margin-left: auto;
+	margin-right: auto;
+	border: 0px;
 }

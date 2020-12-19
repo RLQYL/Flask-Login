@@ -3,7 +3,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title> Login Page </title>
 	<link rel="stylesheet" type="text/css" href="static/index.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
@@ -17,13 +17,16 @@
 	{% endwith %}
 
 	<div id="loginbox">
+		<h1 class="title"> Login </h1>
 		<form action="/login" method="post">
 			<input type="text" id="username" name="username" placeholder="username" minlength="3" required><br><br>
 			<input type="password" id="password" name="password" placeholder="password" minlength="3" required><br><br>
-			<input type="submit" value="Submit" class="button">
+			<input type="submit" value="Submit" id="submit_button">
 		</form>
+
+		<h1 class="title"> Create New Account </h1>
+		<a href="{{url_for('create_user')}}"><button id="create_new_account_button"> Create New Account </button> </a>
 	</div>
 
-	<h1 class="title"> Create New Account </h1>
-	<a href="{{url_for('create_user')}}"><button class="button"> Create New Account </button> </a>
+	
 </body>
