@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title> Login Page </title>
-	<link rel="stylesheet" type="text/css" href="static/index.css">
+	<link rel="shortcut icon" href="#" />
+	<link rel="stylesheet" type="text/css" href="static/body.css">
+	<link rel="stylesheet" type="text/css" href="static/form.css">
+	<link rel="stylesheet" type="text/css" href="static/message.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
@@ -11,16 +13,16 @@
 	{% with messages = get_flashed_messages() %}
 	  {% if messages %}
 	    {% for message in messages %}
-		  <p id="message"> {{message}} </p>
+		  <p class="message"> {{message}} </p>
 		{% endfor %}
 	  {% endif %}
 	{% endwith %}
 
-	<div id="loginbox">
+	<div class="formbox">
 		<h1 class="title"> Login </h1>
-		<form action="/login" method="post">
-			<input type="text" id="username" name="username" placeholder="username" minlength="3" required><br><br>
-			<input type="password" id="password" name="password" placeholder="password" minlength="3" required><br><br>
+		<form action="/" method="post">
+			<input type="text" class="username" name="username" placeholder="username" required><br><br>
+			<input type="password" class="password" name="password" placeholder="password" required><br><br>
 			<input type="submit" value="Submit" id="submit_button">
 		</form>
 

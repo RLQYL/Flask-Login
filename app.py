@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, session, url_for, g, flash, abort
+from flask import Flask, redirect, render_template, request, session, url_for, flash, abort
 from flask_sqlalchemy import SQLAlchemy
 
 import datetime
@@ -16,45 +16,12 @@ class User(db.Model):
     username = db.Column(db.String(10))
     password = db.Column(db.String(10))
 
-class Task(db.Model):
-    id = db.Column(db.Integer, primary_key = True, autoincrement=True)
-    username = db.Column(db.String(10), db.ForeignKey('user.username', ondelete='CASCADE'))
-    description = db.Column(db.Text)
-    due_date = db.Column(db.DateTime)
-    created_date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-    priority = db.Column(db.String(10), db.ForeignKey('priority.level', ondelete='CASCADE'))
-    completed = db.Column(db.Boolean, default=False)
-
-class Priority(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    level= db.Column(db.String(10))
-
 # Creates the tables.
 db.create_all()
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
 
-    # Checks if the levels are in the db already.
-    if Priority.query.filter_by(level="L").first() == None:
-        low = Priority(level="L")
-        db.session.add(low)
-        db.session.commit()
-
-    if Priority.query.filter_by(level="M").first() == None:
-        medium = Priority(level="M")
-        db.session.add(medium)
-        db.session.commit()
-
-    if Priority.query.filter_by(level="H").first() == None:
-        high = Priority(level="H")
-        db.session.add(high)
-        db.session.commit()
-
-    return redirect(url_for('login'))
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
@@ -80,8 +47,10 @@ def create_user():
                         lastname=last_name)
             db.session.add(user)
             db.session.commit()
+            session["id"] = username
+            return redirect(url_for('home'))
         else:
-            flash("The username is taken.")
+            flash("That username is taken.")
     return render_template('CreateAccount.html')   
 
 @app.route('/homepage')
@@ -96,7 +65,7 @@ def home():
 def logout():
     # Removes the user's session and redirects them to the login page.
     session.pop('id', None)
-    return redirect(url_for('login'))
+    return redirect(url_for('index'))
 
 
 if (__name__ == "__main__"):

@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <head>
+	<link rel="shortcut icon" href="#" />
+	<link rel="stylesheet" type="text/css" href="static/body.css">
+	<link rel="stylesheet" type="text/css" href="static/form.css">
+	<link rel="stylesheet" type="text/css" href="static/message.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title> Create Account </title>
 </head>
@@ -8,32 +12,19 @@
 	{% with messages = get_flashed_messages() %}
 	  {% if messages %}
 	    {% for message in messages %}
-		  <div>
-			{{message}}
-		  </div>
+		  <p class="message"> {{message}} </p>
 		{% endfor %}
 	  {% endif %}
 	{% endwith %}
 	
-	{% block body %}{% endblock %}
-	
-	<p> Enter your username and password to log in </p>
-	<form action="/create_user" method="post">
-		<label for="username">Username:</label>
-		<input type="text" id="username" name="username" minlength="3" required><br><br>
-
-		<label for="password">Password:</label>
-		<input type="password" id="password" name="password" minlength="3" required><br><br>
-
-		<label for="first_name">First Name:</label>
-		<input type="text" id="first_name" name="first_name" required><br><br>
-
-		<label for="last_name">Last Name:</label>
-		<input type="text" id="last_name" name="last_name" required><br><br>
-		
-		<input type="submit" value="Submit">
-	</form>
-
-	<h1 class="title"> Login </h1>
-	<a href="{{url_for('login')}}"><button class="button"> Login </button> </a>
+	<div class="formbox">
+		<p class="title"> Please enter the fields below: </p>
+		<form action="/create_user" method="post">
+			<input type="text" class="username" name="username" minlength="3" placeholder="Username" required><br><br>
+			<input type="password" class="password" name="password" minlength="3" placeholder="Password" required><br><br>
+			<input type="text" class="first_name" name="first_name" placeholder="First Name" required><br><br>
+			<input type="text" class="last_name" name="last_name" placeholder="Last Name" required><br><br>
+			<input id="submit_button" type="submit" value="Submit">
+		</form>
+	</div>
 </body>
