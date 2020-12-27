@@ -1,0 +1,26 @@
+.navbar{
+	height: 10%;
+	background-color: blue;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+.header{
+	font-size: 3rem;
+	font-weight: bold;
+	margin-right: 15%;
+	margin-left: 30%;
+}
+
+.logout{
+	font-size: 2rem;
+	color: black;
+	text-decoration: none;
+}
+
+.logout:hover{
+	font-style: italic;
+	color: red;
+}

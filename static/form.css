@@ -1,0 +1,55 @@
+.formbox{
+	border: 2px solid black;
+	width: 30%;
+	height: 40%;
+	padding-left: 7%;
+	padding-right: 7%;
+	padding-top: 3%;
+	padding-bottom: 3%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10%;
+	background-color: #00ffff;
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: center;
+	align-items: center;
+	overflow: auto;
+}
+
+.username, .password, .first_name, .last_name{
+	width: 100%;
+	font-size: 1.5vw;
+	color: black;
+	background-color: white;
+	border-color: white;
+	border: 0px;
+	padding: 5px;
+	margin: 0px;
+}
+
+button{
+	overflow: auto;
+}
+
+#submit_button{
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+#submit_button, #create_new_account_button{
+	font-size: 1.5vw;
+	text-align: center;
+	color: black;
+	background-color: lightgrey;
+	border: 0px;
+	background-color: yellow;
+	font-weight: 650;
+}
+
+@media only screen and (max-width:620px) {
+  /* For mobile phones: */
+  *{
+    width:100%;
+  }
+}

@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title> Home Page </title>
+	<link rel="shortcut icon" href="#" />
+	<link rel="stylesheet" type="text/css" href="static/body.css">
+	<link rel="stylesheet" type="text/css" href="static/home.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
 
-	<p> Welcome </p>
+	<div class="navbar">
+		<h1 class="header"> Welcome {{name}} </h1>
+		<a class="logout" href="{{url_for('logout')}}"> Logout </a>
+	</div>	
+
 </body>

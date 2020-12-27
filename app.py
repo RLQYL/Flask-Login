@@ -1,5 +1,7 @@
-from flask import Flask, redirect, render_template, request, session, url_for, g, flash, abort
+from flask import Flask, redirect, render_template, request, session, url_for, flash, abort
 from flask_sqlalchemy import SQLAlchemy
+
+import datetime
 
 app = Flask(__name__)
 
@@ -14,28 +16,21 @@ class User(db.Model):
     username = db.Column(db.String(10))
     password = db.Column(db.String(10))
 
-# class Priority(db.Model):
-#     id = db.Column(db.Integer, primary_key = True)
-#     firstname = db.Column(db.String(10))
-#     lastname = db.Column(db.String(10))
-
 # Creates the tables.
 db.create_all()
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return redirect(url_for('login'))
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
         user = User.query.filter_by(username=username, password=password).first()
         if user != None:
-            return redirect(url_for('home'))
+            session["id"] = username
+            return redirect(url_for('home')) # url_for takes in a function parameter
         else:
-            flash("The user does not exist")
+            flash("Login Failed!")
     return render_template('index.html')
 
 @app.route('/create_user', methods=['GET', 'POST'])
@@ -45,20 +40,32 @@ def create_user():
         password = request.form["password"]
         first_name = request.form["first_name"]
         last_name = request.form["last_name"]
-        if (User.query.filter_by(password=password).first() == None):
+        if (User.query.filter_by(username=username).first() == None):
             user = User(username=username,
                         password=password,
                         firstname=first_name,
                         lastname=last_name)
             db.session.add(user)
             db.session.commit()
+            session["id"] = username
+            return redirect(url_for('home'))
         else:
-            flash("The password is taken.")
+            flash("That username is taken.")
     return render_template('CreateAccount.html')   
 
-@app.route('/home')
+@app.route('/homepage')
 def home():
-    return render_template('Home.html')   
+    if (len(session) == 0):
+        return(abort(403))
+    name = User.query.filter_by(username=session["id"]).first()
+    user_name = name.firstname + " " + name.lastname
+    return render_template('Home.html', name=user_name)
+
+@app.route('/logout')
+def logout():
+    # Removes the user's session and redirects them to the login page.
+    session.pop('id', None)
+    return redirect(url_for('index'))
 
 
 if (__name__ == "__main__"):
