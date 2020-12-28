@@ -18,13 +18,30 @@
 	{% endwith %}
 	
 	<div class="formbox">
-		<p class="title"> Please enter the fields below: </p>
+		<p class="title"> Enter the fields below: </p>
 		<form action="/create_user" method="post">
-			<input type="text" class="username" name="username" minlength="3" placeholder="Username" required><br><br>
-			<input type="password" class="password" name="password" minlength="3" placeholder="Password" required><br><br>
-			<input type="text" class="first_name" name="first_name" placeholder="First Name" required><br><br>
-			<input type="text" class="last_name" name="last_name" placeholder="Last Name" required><br><br>
-			<input id="submit_button" type="submit" value="Submit">
+
+			<div class="textbox">
+	    		<i class="fas fa-user"></i>
+				<input type="text" class="username" name="username" minlength="3" placeholder="Username (*)" required>
+			</div>
+
+			<div class="textbox">
+	    		<i class="fas fa-lock"></i>
+				<input type="password" class="password" name="password" minlength="3" placeholder="Password (*)" required>
+			</div>
+
+			<div class="textbox">
+	    		<i class="fas fa-user"></i>
+				<input type="text" class="first_name" name="first_name" placeholder="First Name (*)" required>
+			</div>
+
+			<div class="textbox">
+	    		<i class="fas fa-user"></i>
+				<input type="text" class="last_name" name="last_name" placeholder="Last Name (*)" required>
+			</div>
+
+			<input class="button" type="submit" value="Submit">
 		</form>
 	</div>
 </body>

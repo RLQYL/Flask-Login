@@ -1,5 +1,7 @@
+@import "https://use.fontawesome.com/releases/v5.5.0/css/all.css";
+
 .formbox{
-	border: 2px solid black;
+  	border: 2px solid black;
 	width: 30%;
 	height: 40%;
 	padding-left: 7%;
@@ -9,42 +11,50 @@
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 10%;
-	background-color: #00ffff;
 	display: flex;
 	flex-flow: column wrap;
 	justify-content: center;
 	align-items: center;
 	overflow: auto;
+  	color: white;
 }
 
-.username, .password, .first_name, .last_name{
-	width: 100%;
-	font-size: 1.5vw;
-	color: black;
-	background-color: white;
-	border-color: white;
-	border: 0px;
-	padding: 5px;
-	margin: 0px;
+.textbox{
+  width: 100%;
+  overflow: hidden;
+  font-size: 20px;
+  border-bottom: 1px solid #4caf50;
+  margin-bottom: 5%;
+}
+.textbox i{
+  position: absolute;
+  float: left;
+  text-align: center;
+  width: 3%;
+}
+.textbox input{
+  border: none;
+  outline: none;
+  background: none;
+  color: white;
+  font-size: 1.2vw;
+  text-align: center;
 }
 
-button{
-	overflow: auto;
+.button{
+  width: 100%;
+  background: none;
+  border: 2px solid #4caf50;
+  color: white;
+  padding: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 12px 0;
+  overflow: auto;
 }
 
-#submit_button{
-	width: 100%;
-	margin-bottom: 10px;
-}
-
-#submit_button, #create_new_account_button{
-	font-size: 1.5vw;
-	text-align: center;
-	color: black;
-	background-color: lightgrey;
-	border: 0px;
-	background-color: yellow;
-	font-weight: 650;
+#create_account{
+	width: 102%;
 }
 
 @media only screen and (max-width:620px) {
